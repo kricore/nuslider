@@ -36,7 +36,7 @@
 		<style type="text/css">
 			body {font-family:arial,sans-serif;font-size:12px;margin:0;padding:0;}
 			.navigationWrapper {width:200px;height:300px;}
-			ul.navigation li.navItem { width: 100px; display: block; float: left; }
+			ul.navigation li.navItem { width: 100px; display: block; float: left; padding:8px 0; }
 			.itemsWrapper { width: 90%; height: 600px; position: relative; overflow: hidden; }
 			.items { margin: 0; padding: 0; position: absolute; left:0; top:0 }
 			.item { border: 1px solid #ccc; }
@@ -48,20 +48,22 @@
 	</head>
 	<body>
 		<div class="nuSlider">
-			<a class="nextButton">Next</a>
-			<a class="previousButton">Previous</a>
+			
+			<a href="#prev" class="previousButton">Previous</a> | <a href="#next" class="nextButton">Next</a>
+			
+			<br /><br />
 			
 			<div class="navigationWrapper">
-				<a class="navigationPreviousButton">Previous Nav</a>
+				<a href="#back" class="navigationPreviousButton">Previous Nav</a>
 				<ul class="navigation">
-					<li class="navItem"><a class="navigationButton">Slide 1</a></li>
-					<li class="navItem"><a class="navigationButton">Slide 2</a></li>
-					<li class="navItem"><a class="navigationButton">Slide 3</a></li>
-					<li class="navItem"><a class="navigationButton">Slide 4</a></li>
-					<li class="navItem"><a class="navigationButton">Slide 5</a></li>
-					<li class="navItem"><a class="navigationButton">Slide 6</a></li>
+					<li class="navItem"><a href="#" class="navigationButton">Slide 1</a></li>
+					<li class="navItem"><a href="#" class="navigationButton">Slide 2</a></li>
+					<li class="navItem"><a href="#" class="navigationButton">Slide 3</a></li>
+					<li class="navItem"><a href="#" class="navigationButton">Slide 4</a></li>
+					<li class="navItem"><a href="#" class="navigationButton">Slide 5</a></li>
+					<li class="navItem"><a href="#" class="navigationButton">Slide 6</a></li>
 				</ul>
-				<a class="navigationNextButton">Next Nav</a>
+				<a href="#forward" class="navigationNextButton">Next Nav</a>
 			</div>
 			
 			<div class="itemsWrapper">
