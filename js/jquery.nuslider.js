@@ -5,7 +5,6 @@
  * @license		http://nuevvo.com/license
  */
 
-var $nuSlider = jQuery.noConflict();
 (function($) {
 	$.nuSlider = function(element, options) {
 		var plugin = this;
@@ -166,22 +165,28 @@ var $nuSlider = jQuery.noConflict();
 				plugin.navigate(plugin.index);
 			});
 			var items = plugin.items.hammer();
-			items.on('drag swipeleft', function(event) {
+			items.on('drag swipe', function(event) {
 				if (Hammer.utils.isVertical(event.gesture.direction)) {
 					return;
 				}
 				event.gesture.preventDefault();
-				plugin.setNextItem();
-				plugin.navigate(plugin.index);
-				plugin.moveScrollbar();
-			}).on('drag swiperight', function(event) {
+				if (event.type == 'swipe' && event.gesture.direction === 'left') {
+					plugin.setNextItem();
+					plugin.navigate(plugin.index);
+					plugin.moveScrollbar();
+				}
+
+			}).on('drag swipe', function(event) {
 				if (Hammer.utils.isVertical(event.gesture.direction)) {
 					return;
 				}
 				event.gesture.preventDefault();
-				plugin.setPreviousItem();
-				plugin.navigate(plugin.index);
-				plugin.moveScrollbar();
+				if (event.type == 'swipe' && event.gesture.direction === 'right') {
+					plugin.setPreviousItem();
+					plugin.navigate(plugin.index);
+					plugin.moveScrollbar();
+				}
+
 			});
 			var resizeTimer;
 			$(window).resize(function() {
@@ -238,7 +243,7 @@ var $nuSlider = jQuery.noConflict();
 					var increment = plugin.settings.navigationItemWidth * plugin.settings.navigationStep;
 					var offset = Math.abs(plugin.nav.position().left - increment);
 					if (width >= offset) {
-						plugin.nav.animate({
+						plugin.nav.anima({
 							left : '-=' + increment + 'px'
 						});
 					}
@@ -249,7 +254,7 @@ var $nuSlider = jQuery.noConflict();
 					var increment = plugin.settings.navigationItemWidth * plugin.settings.navigationStep;
 					var offset = plugin.nav.position().left + increment;
 					if (offset <= 0) {
-						plugin.nav.animate({
+						plugin.nav.anima({
 							left : '+=' + increment + 'px'
 						});
 					}
@@ -265,17 +270,23 @@ var $nuSlider = jQuery.noConflict();
 			$(plugin.navigationButtons[plugin.index]).addClass('navigationButtonActive');
 			$element.addClass('nuSliderAnimating');
 			var position = $(plugin.items[plugin.index]).position();
-			plugin.itemsContainer.animate({
-				'top' : -position.top,
-				'left' : -position.left
-			}, plugin.settings.transitionTime, function() {
-				$element.removeClass('nuSliderAnimating');
+			var t = -position.top + 'px';
+			var l = -position.left + 'px';
+			plugin.itemsContainer.anima({
+				'top' : t,
+				'left' : l
+			}, plugin.settings.transitionTime, {
+				complete : function() {
+					$element.removeClass('nuSliderAnimating');
+				}
 			});
 			if (plugin.settings.interval) {
 				plugin.loop = setInterval(function() {
 					plugin.setNextItem();
 					plugin.navigate(plugin.index);
-				}, plugin.settings.interval);
+				}, plugin.settings.interval, function() {
+					$element.removeClass('nuSliderAnimating');
+				});
 			}
 		}, plugin.setNextItem = function() {
 			if (plugin.index < (plugin.items.length - plugin.settings.step)) {
