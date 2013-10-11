@@ -166,13 +166,19 @@ var $nuSlider = jQuery.noConflict();
 				plugin.navigate(plugin.index);
 			});
 			var items = plugin.items.hammer();
-			items.on('swipeleft', function(event) {
-				event.preventDefault();
+			items.on('drag swipeleft', function(event) {
+				if (Hammer.utils.isVertical(event.gesture.direction)) {
+					return;
+				}
+				event.gesture.preventDefault();
 				plugin.setNextItem();
 				plugin.navigate(plugin.index);
 				plugin.moveScrollbar();
-			}).on('swiperight', function(event) {
-				event.preventDefault();
+			}).on('drag swiperight', function(event) {
+				if (Hammer.utils.isVertical(event.gesture.direction)) {
+					return;
+				}
+				event.gesture.preventDefault();
 				plugin.setPreviousItem();
 				plugin.navigate(plugin.index);
 				plugin.moveScrollbar();
