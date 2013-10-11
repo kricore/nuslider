@@ -1,50 +1,56 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>nuSlider</title>
 		<meta charset="utf-8" />
+		<title>nuSlider</title>
 		<meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1.0" />
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js" type="text/javascript"></script>
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
 		<script src="js/minimit-anima.min.js" type="text/javascript"></script>
 		<script src="js/jquery.hammer.min.js" type="text/javascript"></script>
 		<script src="js/jquery.nuslider.js" type="text/javascript"></script>
 		<script type="text/javascript">
-			jQuery(document).ready(function() {
-				jQuery('.nuSlider').nuSlider({
-					step: 1,
-					viewport: 1,
-					transitionTime: 500,
-					interval: 0,
-					minItemWidth: 200,
-					aspectRatio: false,
-					scrollbar: false,
-					orientation: 'horizontal',
-					itemsWrapperClass: '.itemsWrapper',
-					itemsContainerClass: '.items',
-					itemClass: '.item',
-					scrollbarClass: '.scrollbar',
-					navigationScrolling: true,
-					navigationStep: 1,
-					navigationItemWidth: 100
-				});
-			});
+			(function($){
+				$(document).ready(function() {
+					$('.nuSlider').nuSlider({
+						step: 1,
+						viewport: 1,
+						transitionTime: 500,
+						interval: 0,
+						minItemWidth: 200,
+						aspectRatio: false,
+						scrollbar: false,
+						orientation: 'horizontal',
+						itemsWrapperClass: '.itemsWrapper',
+						itemsContainerClass: '.items',
+						itemClass: '.item',
+						scrollbarClass: '.scrollbar',
+						navigationScrolling: true,
+						navigationStep: 1,
+						navigationItemWidth: 100
+					});
+				});				
+			})(jQuery);
 		</script>
+		
 		<style type="text/css">
-			body {margin:0;padding:0;}
+			body {font-family:arial,sans-serif;font-size:12px;margin:0;padding:0;}
 			.navigationWrapper {width:200px;height:300px;}
-			.itemsWrapper { width: 90%; height: 140px; position: relative; overflow: hidden; }
+			ul.navigation li.navItem { width: 100px; display: block; float: left; }
+			.itemsWrapper { width: 90%; height: 600px; position: relative; overflow: hidden; }
 			.items { margin: 0; padding: 0; position: absolute; left:0; top:0 }
 			.item { border: 1px solid #ccc; }
+				.item img {width:300px;height:auto;}
 			.scrollbar { width: 90%; height: 50px; position: relative; margin: 0 auto; background: red; }
 			.scrollbar span.handler { display: block; width: 100px; height: 50px; background: green; position: absolute; z-index: 10; top: 0; left: 0; }
 			.scrollbar span.progress { display: block; width: 100px; height: 50px; background: yellow; z-index: 9; }
-			ul.navigation li.navItem { width: 100px; display: block; float: left; }
 		</style>
 	</head>
 	<body>
 		<div class="nuSlider">
 			<a class="nextButton">Next</a>
 			<a class="previousButton">Previous</a>
+			
 			<div class="navigationWrapper">
 				<a class="navigationPreviousButton">Previous Nav</a>
 				<ul class="navigation">
@@ -57,32 +63,41 @@
 				</ul>
 				<a class="navigationNextButton">Next Nav</a>
 			</div>
+			
 			<div class="itemsWrapper">
 				<ul class="items">
 					<li class="item">
 						<h2>Slide 1</h2>
+						<img src="images/img01.jpg" alt="" />
 					</li>
 					<li class="item">
 						<h2>Slide 2</h2>
+						<img src="images/img02.jpg" alt="" />
 					</li>
 					<li class="item">
 						<h2>Slide 3</h2>
+						<img src="images/img03.jpg" alt="" />
 					</li>
 					<li class="item">
 						<h2>Slide 4</h2>
+						<img src="images/img04.jpg" alt="" />
 					</li>
 					<li class="item">
 						<h2>Slide 5</h2>
+						<img src="images/img05.jpg" alt="" />
 					</li>
 					<li class="item">
 						<h2>Slide 6</h2>
+						<img src="images/img06.jpg" alt="" />
 					</li>
 				</ul>
 			</div>
+			
 			<div class="scrollbar">
 				<span class="progress"></span>
 				<span class="handler"></span>
 			</div>
+			
 		</div>
 	</body>
 </html>
