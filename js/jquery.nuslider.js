@@ -146,6 +146,8 @@
 				plugin.nav.css('margin', '0');
 				plugin.nav.css('width', plugin.navigationButtons.length * plugin.settings.navigationItemWidth + 'px');
 			}
+			
+			plugin.itemsWrapper.removeClass('nuSliderLoading');
 
 		}, plugin.addEvents = function() {
 
